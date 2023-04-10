@@ -30,7 +30,7 @@ public class Affectation implements Serializable {
 	//bi-directional many-to-one association to Employe
 	@ManyToOne
 	@JoinColumn(name="id_employe")
-	private Employe employe;
+	private EmployeEntity employe;
 
 	//bi-directional many-to-one association to Projet
 	@ManyToOne
@@ -64,12 +64,12 @@ public class Affectation implements Serializable {
 		this.dateFin = dateFin;
 	}
 
-	public Employe getEmploye() {
+	public EmployeEntity getEmploye() {
 		return this.employe;
 	}
 
-	public void setEmploye(Employe employe) {
-		this.employe = employe;
+	public void setEmploye(EmployeEntity employeEntity) {
+		this.employe = employeEntity;
 	}
 
 	public Projet getProjet() {
