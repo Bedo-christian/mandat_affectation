@@ -1,11 +1,13 @@
 package com.mandat.affecationf.mapper;
 
-import com.mandat.affecationf.entity.EmployeEntity;
-import com.mandat.affecationf.model.EmployeReq;
+import com.mandat.affecationf.entity.Employe;
+import com.mandat.affecationf.model.EmployesRep;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface EmployeMapper {
-    EmployeReq toEmployeDto (EmployeEntity employeEntity);
-    EmployeEntity dtoToEmployEntity (EmployeReq employeReq);
+    EmployeMapper INSTANCE = Mappers.getMapper(EmployeMapper.class);
+    EmployesRep toEmployeDto (Employe employe);
+    Employe dtoToEmployEntity (EmployesRep employeReq);
 }

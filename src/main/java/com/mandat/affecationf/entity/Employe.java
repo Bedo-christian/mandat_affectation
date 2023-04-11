@@ -12,7 +12,7 @@ import java.util.List;
  */
 @Entity
 @NamedQuery(name="Employe.findAll", query="SELECT e FROM Employe e")
-public class EmployeEntity implements Serializable {
+public class Employe implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
@@ -47,7 +47,7 @@ public class EmployeEntity implements Serializable {
 	@OneToMany(mappedBy="employe")
 	private List<Affectation> affectations;
 
-	public EmployeEntity() {
+	public Employe() {
 	}
 
 	public int getIdEmploye() {
