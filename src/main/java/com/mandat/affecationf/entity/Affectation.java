@@ -34,7 +34,7 @@ public class Affectation implements Serializable {
 
 	//bi-directional many-to-one association to Projet
 	@ManyToOne
-	@JoinColumn(name="code_projet")
+	@JoinColumn(name="id_projet")
 	private Projet projet;
 
 	public Affectation() {

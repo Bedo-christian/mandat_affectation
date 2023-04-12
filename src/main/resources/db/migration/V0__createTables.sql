@@ -73,11 +73,12 @@ PRIMARY KEY (id_client)
 -----table projet
 */
 CREATE TABLE projet(
+id_projet INT NOT NULL AUTO_INCREMENT,
 code_projet VARCHAR(50) NOT NULL,
 nom_projet VARCHAR (250),
  `description` TEXT,
  id_client INT,
-PRIMARY KEY (code_projet),
+PRIMARY KEY (id_projet),
  FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`)
  );
  
@@ -87,11 +88,11 @@ PRIMARY KEY (code_projet),
  CREATE TABLE affectation(
  id_affectation INT NOT NULL AUTO_INCREMENT, 
  id_employe INT, 
- code_projet VARCHAR(50), 
+ id_projet INT,
  date_debut DATETIME, 
  date_fin DATETIME,
 PRIMARY KEY(id_affectation),
 FOREIGN KEY (`id_employe`) REFERENCES `employe` (`id_employe`),
-FOREIGN KEY (`code_projet`) REFERENCES `projet` (`code_projet`)
+FOREIGN KEY (`id_projet`) REFERENCES `projet` (`id_projet`)
  )
 

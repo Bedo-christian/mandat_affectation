@@ -15,6 +15,9 @@ public class Projet implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
+	@Column(name="id_projet")
+	private int idProjet;
+
 	@Column(name="code_projet")
 	private String codeProjet;
 
@@ -34,6 +37,14 @@ public class Projet implements Serializable {
 	private Client client;
 
 	public Projet() {
+	}
+
+	public int getIdProjet() {
+		return idProjet;
+	}
+
+	public void setIdProjet(int idProjet) {
+		this.idProjet = idProjet;
 	}
 
 	public String getCodeProjet() {
