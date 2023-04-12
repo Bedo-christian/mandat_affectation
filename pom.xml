@@ -123,6 +123,12 @@
 							<inputSpec>
 								${project.basedir}/src/main/resources/openapi/employe.yaml
 							</inputSpec>
+							<inputSpec>
+								${project.basedir}/src/main/resources/openapi/client.yaml
+							</inputSpec>
+							<inputSpec>
+								${project.basedir}/src/main/resources/openapi/projet.yaml
+							</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>com.mandat.affecationf.api</apiPackage>
 							<modelPackage>com.mandat.affecationf.model</modelPackage>

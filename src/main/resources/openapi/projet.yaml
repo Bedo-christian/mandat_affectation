@@ -1,0 +1,123 @@
+openapi: 3.0.1
+info:
+  title: API pour l'entité Projet
+  version: 1.0.0
+paths:
+  /projets:
+    post:
+      tags:
+        - Projets
+      summary: Enregistrement des projets
+      operationId: saveProjets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjetDto'
+      responses:
+        '201':
+          description: Ajout success
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjetDto'
+        '500':
+          description: Erreur interne du serveur
+
+    get:
+      summary: Récupérer la liste des toutes les projets disponibles
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ProjetDto'
+        '500':
+          description: Erreur interne du serveur
+
+  /projets/{projet_id}:
+    get:
+      summary: Obtenir un projet par ID
+      description: Récupère un Projet spécifique en fonction de son ID.
+      parameters:
+        - name: projet_id
+          in: path
+          description: ID du projet à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Succès - Ressource récupérée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjetDto'
+        '404':
+          description: Ressource non trouvée
+        '500':
+          description: Erreur interne du serveur
+
+    put:
+      summary: Mettre à jour la table projet
+      parameters:
+        - name: projet_id
+          in: path
+          description: ID du projet à mettre à jour'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ProjetDto'
+      responses:
+        '200':
+          description: Data mis à jour avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ProjetDto'
+        '404':
+          description: data non trouvé
+        '500':
+          description: Erreur interne du serveur
+
+    delete:
+      summary: Supprimer un client par ID
+      parameters:
+        - name: projet_id
+          in: path
+          description: ID du projet à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Aucun contenu
+        '404':
+          description: client non trouvé
+components:
+  schemas:
+
+    ProjetDto:
+      type: object
+      required:
+        - code_projet
+      properties:
+        id_projet:
+          type: integer
+        code_projet:
+          type: string
+        nom_projet:
+          type: string
+        description:
+          type: string
+        client:
+          type: array
+          items:
+            $ref: 'client.yaml#/components/schemas/ClientDto'

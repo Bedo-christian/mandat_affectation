@@ -119,7 +119,9 @@ paths:
         '204':
           description: Aucun contenu
         '404':
-          description: employe non trouvé    
+          description: employe non trouvé
+
+  #API POUR LE CLIENT
 components:
   schemas:
 
