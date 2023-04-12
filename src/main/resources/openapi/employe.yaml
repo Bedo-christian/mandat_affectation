@@ -122,6 +122,8 @@ paths:
           description: employe non trouvé    
 components:
   schemas:
+
+    #request and response pour l'employe
     EmployeReq:
       type: object
       required:
@@ -130,7 +132,6 @@ components:
         - nationalite
         - email
         - phone
-        - date_embauche
         - specialite
       properties:
         nom:
@@ -147,6 +148,7 @@ components:
           type: string
         date_embauche:
           type: string
+          format: date
         specialite:
           type: string
         description:
@@ -154,8 +156,7 @@ components:
         photo:
           type: string
         cv:
-          type: string            
-     
+          type: string
     EmployesRep:
       allOf:
         - $ref: '#/components/schemas/EmployeReq'
@@ -164,4 +165,15 @@ components:
             id_employe:
               type: integer
       description: Toutes les employés.
+
+
+    #DTO pour afficher les messages d'erreur
+    Errorr:
+      type: object
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
  
