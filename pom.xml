@@ -72,7 +72,6 @@
 			<artifactId>jackson-databind-nullable</artifactId>
 			<version>0.2.4</version>
 		</dependency>
-
 		<dependency>
 			<groupId>io.swagger</groupId>
 			<artifactId>swagger-annotations</artifactId>
@@ -85,7 +84,10 @@
 			<version>3.0.0</version>
 		</dependency>
 
-
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.mapstruct/mapstruct -->
 		<dependency>
 			<groupId>org.mapstruct</groupId>
@@ -121,13 +123,7 @@
 						</goals>
 						<configuration>
 							<inputSpec>
-								${project.basedir}/src/main/resources/openapi/employe.yaml
-							</inputSpec>
-							<inputSpec>
-								${project.basedir}/src/main/resources/openapi/client.yaml
-							</inputSpec>
-							<inputSpec>
-								${project.basedir}/src/main/resources/openapi/projet.yaml
+								${project.basedir}/src/main/resources/openapi/api.yaml
 							</inputSpec>
 							<generatorName>spring</generatorName>
 							<apiPackage>com.mandat.affecationf.api</apiPackage>

@@ -3,6 +3,7 @@ package com.mandat.affecationf.service.impl;
 import com.mandat.affecationf.dao.EmployeDao;
 import com.mandat.affecationf.entity.Employe;
 import com.mandat.affecationf.exception.CustomException;
+import com.mandat.affecationf.exception.NotFoundException;
 import com.mandat.affecationf.mapper.EmployeMapper;
 import com.mandat.affecationf.model.EmployeReq;
 import com.mandat.affecationf.model.EmployesRep;
@@ -68,9 +69,9 @@ public class EmployeServiceImpl implements EmployeService {
                 throw new CustomException("ID" + employeId + "NOT FOUND", HttpStatus.NOT_FOUND.value());
             }
 
-        } catch (CustomException ex) {
+        } catch (NotFoundException ex) {
             System.out.println("TESTTESTTTE");
-            throw new CustomException("ID" + employeId + "NOT FOUND", HttpStatus.NOT_FOUND.value());
+            throw new NotFoundException();
         }
     }
     @Override

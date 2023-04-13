@@ -1,0 +1,462 @@
+openapi: 3.0.1
+info:
+  title: Affectation Fujitsu
+  description: Mini projet pour les affectations des employés.
+  version: 1.0.0
+servers:
+  - url: http://localhost:8080
+    description: dev
+tags:
+  - name: Employes
+    description: Endpoints pour l'employe
+  - name: Clients
+    description: Endpoints pour l'operation sur le client
+  - name: Projets
+    description: Endpoints pour l'operation le projet
+paths:
+  /employes:
+    post:
+      tags:
+        - Employes
+      summary: Enregistrer les employeurs
+      operationId: saveEmployer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeReq'
+            examples:
+              UtilisateurReq:
+                summary: Enregistrement d'un employé
+                value:
+                  nom: Christian
+                  prenom: Thierry
+                  adresse: 200 av pont scott
+                  nationalite: malagasy
+                  email: test@gmail.com
+                  specialiste: JAVA
+      responses:
+        '201':
+          description: created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeReq'
+        400:
+          description: erreur de la syntaxe parametres.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+        '500':
+          description: Erreur interne du serveur
+
+    get:
+      tags:
+        - Employes
+      summary: Récupérer la liste des toutes les employes
+      operationId: getAllEmploye
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/EmployesRep'
+        '500':
+          description: Erreur interne du serveur
+
+  /employes/{employe_id}:
+    get:
+      tags:
+        - Employes
+      summary: Obtenir un employe par ID
+      operationId: getEmployeById
+      description: Récupère un employe spécifique en fonction de son ID.
+      parameters:
+        - name: employe_id
+          in: path
+          description: ID de l'employe à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Succès - Ressource récupérée
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployesRep'
+        '404':
+          description: Ressource non trouvée
+        '500':
+          description: Erreur interne du serveur
+
+    put:
+      tags:
+        - Employes
+      summary: Mettre à jour la table employe
+      operationId: updateEmployeById
+      description: Mettre à jour les informations existant
+      parameters:
+        - name: employe_id
+          in: path
+          description: ID de l'employé'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/EmployeReq'
+      responses:
+        '200':
+          description: Employe mis à jour avec succès
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EmployeReq'
+        '400':
+          description: erreur de la syntaxe parametres.
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
+        '404':
+          description: Employe non trouvé
+        '500':
+          description: Erreur interne du serveur
+
+    delete:
+      tags:
+        - Employes
+      summary: Supprimer un employe par ID
+      operationId: deleteEmployeById
+      description: Supprime un exemple en utilisant son ID comme paramètre
+      parameters:
+        - name: employe_id
+          in: path
+          description: ID de l'employe à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Aucun contenu
+        '404':
+          description: employe non trouvé
+
+  #API POUR LE CLIENT
+  /clients:
+    post:
+      tags:
+        - Clients
+      summary: Enregistrement des clients
+      operationId: saveClient
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'client.yaml#/components/schemas/ClientDto'
+            examples:
+              ClientDto:
+                summary: Exemple d'ajout d'un client
+                value:
+                  nom_client: MCN
+                  adresse: boul Rene Levesque
+                  siteweb: mcn.gouv.qc
+                  description: gouvernement Malagasy
+                  email: test@gmail.com
+      responses:
+        '201':
+          description: Ajout success
+          content:
+            application/json:
+              schema:
+                $ref: 'client.yaml#/components/schemas/ClientDto'
+        '500':
+          description: Erreur interne du serveur
+
+    get:
+      tags:
+        - Clients
+      summary: Récupérer la liste des toutes les clients disponibles
+      operationId: getAllClients
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'client.yaml#/components/schemas/ClientDto'
+        '500':
+          description: Erreur interne du serveur
+
+  /clients/{client_id}:
+    get:
+      tags:
+        - Clients
+      summary: Obtenir un client par ID
+      operationId: getClientById
+      description: Récupère un client spécifique en fonction de son ID.
+      parameters:
+        - name: client_id
+          in: path
+          description: ID du client à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Succès - Ressource récupérée
+          content:
+            application/json:
+              schema:
+                $ref: 'client.yaml#/components/schemas/ClientDto'
+        '404':
+          description: Ressource non trouvée
+        '500':
+          description: Erreur interne du serveur
+
+    put:
+      tags:
+        - Clients
+      operationId: updateClientById
+      summary: Mettre à jour la table client
+      parameters:
+        - name: client_id
+          in: path
+          description: ID du client à mettre à jour'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'client.yaml#/components/schemas/ClientDto'
+      responses:
+        '200':
+          description: Client mis à jour avec succès
+          content:
+            application/json:
+              schema:
+                $ref: 'client.yaml#/components/schemas/ClientDto'
+        '404':
+          description: Client non trouvé
+        '500':
+          description: Erreur interne du serveur
+
+    delete:
+      tags:
+        - Clients
+      operationId: deleteClientById
+      summary: Supprimer un client par ID
+      description: Supprime un exemple en utilisant son ID comme paramètre
+      parameters:
+        - name: client_id
+          in: path
+          description: ID du client à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Aucun contenu
+        '404':
+          description: client non trouvé
+
+  #API pour le Projet
+  /projets:
+    post:
+      tags:
+        - Projets
+      summary: Enregistrement des projets
+      operationId: saveProjets
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'projet.yaml#/components/schemas/ProjetDto'
+      responses:
+        '201':
+          description: Ajout success
+          content:
+            application/json:
+              schema:
+                $ref: 'projet.yaml#/components/schemas/ProjetDto'
+        '500':
+          description: Erreur interne du serveur
+
+    get:
+      tags:
+        - Projets
+      summary: Récupérer la liste des toutes les projets disponibles
+      operationId: getAllListProjet
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'projet.yaml#/components/schemas/ProjetDto'
+        '500':
+          description: Erreur interne du serveur
+
+  /projets/{projet_id}:
+    get:
+      tags:
+        - Projets
+      summary: Obtenir un projet par ID
+      operationId: getProjetById
+      description: Récupère un Projet spécifique en fonction de son ID.
+      parameters:
+        - name: projet_id
+          in: path
+          description: ID du projet à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Succès - Ressource récupérée
+          content:
+            application/json:
+              schema:
+                $ref: 'projet.yaml#/components/schemas/ProjetDto'
+        '404':
+          description: Ressource non trouvée
+        '500':
+          description: Erreur interne du serveur
+
+    put:
+      tags:
+        - Projets
+      summary: Mettre à jour la table projet
+      operationId: updateProjet
+      parameters:
+        - name: projet_id
+          in: path
+          description: ID du projet à mettre à jour'
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'projet.yaml#/components/schemas/ProjetDto'
+      responses:
+        '200':
+          description: Data mis à jour avec succès
+          content:
+            application/json:
+              schema:
+                $ref: 'projet.yaml#/components/schemas/ProjetDto'
+        '404':
+          description: data non trouvé
+        '500':
+          description: Erreur interne du serveur
+
+    delete:
+      tags:
+        - Projets
+      summary: Supprimer un client par ID
+      operationId: deleteProjetById
+      parameters:
+        - name: projet_id
+          in: path
+          description: ID du projet à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Aucun contenu
+        '404':
+          description: client non trouvé
+components:
+  schemas:
+
+    #request and response pour l'employe
+    EmployeReq:
+      type: object
+      required:
+        - nom
+        - adresse
+        - nationalite
+        - email
+        - phone
+        - specialite
+      properties:
+        nom:
+          type: string
+          minLength: 2
+          maxLength: 5
+          example: Vincent
+        prenom:
+          type: string
+        adresse:
+          type: string
+        nationalite:
+          type: string
+        email:
+          type: string
+        phone:
+          type: string
+        date_embauche:
+          type: string
+          format: date
+        specialite:
+          type: string
+        description:
+          type: string
+        photo:
+          type: string
+        cv:
+          type: string
+    EmployesRep:
+      allOf:
+        - $ref: '#/components/schemas/EmployeReq'
+        - type: object
+          properties:
+            id_employe:
+              type: integer
+      description: Toutes les employés.
+
+
+    #DTO pour afficher les messages d'erreur
+    ErrorDetails:
+      type: object
+      properties:
+        code:
+          description: Application error code.
+          type: integer
+          nullable: false
+          example: 400
+        message:
+          description: A short, summary of the problem type.
+          type: string
+          nullable: false
+          example: 'size must be between 10 and 12.'
+        field:
+          description: The field that caused the error.
+          type: string
+          example: 'consumer.phone'
+        value:
+          description: The value of the field that caused the error.
+          type: object
+          example: null
+        location:
+          description: The location of the field that caused the error.
+          type: string
+          enum: [ 'BODY','PATH','QUERY','HEADER' ]
+          example: 'BODY'
+ 
