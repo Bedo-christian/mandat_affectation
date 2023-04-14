@@ -18,6 +18,4 @@ components:
         description:
           type: string
         client:
-          type: array
-          items:
-            $ref: 'client.yaml#/components/schemas/ClientDto'
+          $ref: 'client.yaml#/components/schemas/ClientDto'
