@@ -1,0 +1,28 @@
+openapi: 3.0.1
+info:
+  title: API pour l'entité Projet
+  version: 1.0.0
+components:
+  schemas:
+    ProjetDto:
+      type: object
+      required:
+        - code_projet
+      properties:
+        code_projet:
+          type: string
+        nom_projet:
+          type: string
+        description:
+          type: string
+        client:
+          $ref: 'client.yaml#/components/schemas/ClientDto'
+
+    ProjetResponse:
+      allOf:
+        - $ref: '#/components/schemas/ProjetDto'
+        - type: object
+          properties:
+            id_projet:
+              type: integer
+      description: Toutes les propriétés de l'entité Projet.
