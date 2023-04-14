@@ -3,16 +3,22 @@ package com.mandat.affecationf.delegate;
 
 import com.mandat.affecationf.api.ClientsApiDelegate;
 import com.mandat.affecationf.model.ClientDto;
+import com.mandat.affecationf.model.ClientResponse;
 import com.mandat.affecationf.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.request.NativeWebRequest;
 
 
 import java.util.List;
+import java.util.Optional;
 
 /**
+ *  Point d'entrée du controle pour le Client comme Controller normale
+ *
+ */ /**
  * Point d'entrée du controle pour le Client comme Controller normale
  */
 @Service
@@ -28,16 +34,17 @@ public class ClientDelegate implements ClientsApiDelegate {
     }
 
     @Override
-    public ResponseEntity<List<ClientDto>> getAllClients() {
-        List<ClientDto> clientDtoList = clientService.getAllClients();
+    public ResponseEntity<List<ClientResponse>> getAllClients() {
+        List<ClientResponse> clientDtoList = clientService.getAllClients();
         return ResponseEntity.ok(clientDtoList);
     }
 
     @Override
-    public ResponseEntity<ClientDto> getClientById(Integer clientId) {
-        ClientDto clientDto = clientService.getClientById(clientId);
+    public ResponseEntity<ClientResponse> getClientById(Integer clientId) {
+        ClientResponse clientDto = clientService.getClientById(clientId);
         return ResponseEntity.ok(clientDto);
     }
+
 
     @Override
     public ResponseEntity<ClientDto> saveClient(ClientDto clientDto) {

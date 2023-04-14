@@ -3,6 +3,7 @@ package com.mandat.affecationf.delegate;
 
 import com.mandat.affecationf.api.ProjetsApiDelegate;
 import com.mandat.affecationf.model.ProjetDto;
+import com.mandat.affecationf.model.ProjetResponse;
 import com.mandat.affecationf.service.ProjetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -42,8 +43,8 @@ public class ProjetDelegate implements ProjetsApiDelegate {
      * @see ProjetsApi#getAllListProjet
      */
     @Override
-    public ResponseEntity<List<ProjetDto>> getAllListProjet() {
-        List<ProjetDto> projetList = projetService.getAllProjet();
+    public ResponseEntity<List<ProjetResponse>> getAllListProjet() {
+        List<ProjetResponse> projetList = projetService.getAllProjet();
         return ResponseEntity.ok(projetList);
     }
 
@@ -58,8 +59,8 @@ public class ProjetDelegate implements ProjetsApiDelegate {
      * @see ProjetsApi#getProjetById
      */
     @Override
-    public ResponseEntity<ProjetDto> getProjetById(Integer projetId) {
-        ProjetDto projetDto = projetService.getProjetById(projetId);
+    public ResponseEntity<ProjetResponse> getProjetById(Integer projetId) {
+        ProjetResponse projetDto = projetService.getProjetById(projetId);
         return new ResponseEntity<>(projetDto,HttpStatus.OK);
     }
 
