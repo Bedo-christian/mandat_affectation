@@ -5,14 +5,12 @@ info:
 components:
   schemas:
 
-    #request and response pour l'employe
+    #request params
     ClientDto:
       type: object
       required:
         - nom_client
       properties:
-        id_client:
-          type: integer
         nom_client:
           type: string
         adresse:
@@ -24,12 +22,14 @@ components:
         email:
           type: string
 
-  #   ClientResponse:
-  #      allOf:
-  #        - $ref: '#/components/schemas/ClientDto'
-  #        - type: object
-  #          properties:
-  #            id_client:
-  #              type: integer
-  #      description: Liste de toutes les clients.
+      #Response
+    ClientResponse:
+
+      allOf:
+        - $ref: '#/components/schemas/ClientDto'
+        - type: object
+          properties:
+            id_client:
+              type: integer
+      description:  Toutes les propriétés du client.
  

@@ -24,7 +24,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EmployeReq'
+              $ref: 'employe.yaml#/components/schemas/EmployeReq'
             examples:
               UtilisateurReq:
                 summary: Enregistrement d'un employé
@@ -41,7 +41,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EmployeReq'
+                $ref: 'employe.yaml#/components/schemas/EmployeReq'
         400:
           description: erreur de la syntaxe parametres.
           content:
@@ -64,7 +64,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/EmployesRep'
+                  $ref: 'employe.yaml#/components/schemas/EmployesRep'
         '500':
           description: Erreur interne du serveur
 
@@ -88,7 +88,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EmployesRep'
+                $ref: 'employe.yaml#/components/schemas/EmployesRep'
         '404':
           description: Ressource non trouvée
         '500':
@@ -111,14 +111,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/EmployeReq'
+              $ref: 'employe.yaml#/components/schemas/EmployeReq'
       responses:
         '200':
           description: Employe mis à jour avec succès
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/EmployeReq'
+                $ref: 'employe.yaml#/components/schemas/EmployeReq'
         '400':
           description: erreur de la syntaxe parametres.
           content:
@@ -193,7 +193,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'client.yaml#/components/schemas/ClientDto'
+                  $ref: 'client.yaml#/components/schemas/ClientResponse'
         '500':
           description: Erreur interne du serveur
 
@@ -217,7 +217,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'client.yaml#/components/schemas/ClientDto'
+                $ref: 'client.yaml#/components/schemas/ClientResponse'
         '404':
           description: Ressource non trouvée
         '500':
@@ -306,7 +306,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: 'projet.yaml#/components/schemas/ProjetDto'
+                  $ref: 'projet.yaml#/components/schemas/ProjetResponse'
         '500':
           description: Erreur interne du serveur
 
@@ -330,7 +330,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: 'projet.yaml#/components/schemas/ProjetDto'
+                $ref: 'projet.yaml#/components/schemas/ProjetResponse'
         '404':
           description: Ressource non trouvée
         '500':
@@ -384,54 +384,6 @@ paths:
           description: client non trouvé
 components:
   schemas:
-
-    #request and response pour l'employe
-    EmployeReq:
-      type: object
-      required:
-        - nom
-        - adresse
-        - nationalite
-        - email
-        - phone
-        - specialite
-      properties:
-        nom:
-          type: string
-          minLength: 2
-          maxLength: 5
-          example: Vincent
-        prenom:
-          type: string
-        adresse:
-          type: string
-        nationalite:
-          type: string
-        email:
-          type: string
-        phone:
-          type: string
-        date_embauche:
-          type: string
-          format: date
-        specialite:
-          type: string
-        description:
-          type: string
-        photo:
-          type: string
-        cv:
-          type: string
-    EmployesRep:
-      allOf:
-        - $ref: '#/components/schemas/EmployeReq'
-        - type: object
-          properties:
-            id_employe:
-              type: integer
-      description: Toutes les employés.
-
-
     #DTO pour afficher les messages d'erreur
     ErrorDetails:
       type: object

@@ -1,7 +1,7 @@
 package com.mandat.affecationf.service;
 
-import com.mandat.affecationf.model.ClientDto;
 import com.mandat.affecationf.model.ProjetDto;
+import com.mandat.affecationf.model.ProjetResponse;
 
 import java.util.List;
 
@@ -10,9 +10,9 @@ import java.util.List;
  */
 public interface ProjetService {
 
-    List<ProjetDto> getAllProjet();
+    List<ProjetResponse> getAllProjet();
     ProjetDto saveProjet(ProjetDto projetDto);
     ProjetDto updateProjet(Integer idProjet, ProjetDto projetDto);
-    ProjetDto getProjetById(Integer projetId);
+    ProjetResponse getProjetById(Integer projetId);
     void deleteProjetById(Integer projetId);
 }

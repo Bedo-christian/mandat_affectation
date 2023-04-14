@@ -5,6 +5,7 @@ import com.mandat.affecationf.entity.Client;
 import com.mandat.affecationf.exception.NotFoundException;
 import com.mandat.affecationf.mapper.ClientMapper;
 import com.mandat.affecationf.model.ClientDto;
+import com.mandat.affecationf.model.ClientResponse;
 import com.mandat.affecationf.service.ClientService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +28,10 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public List<ClientDto> getAllClients() {
+    public List<ClientResponse> getAllClients() {
         logger.info("Recuperer toutes les clients");
         List<Client> clientList = clientDao.findAll();
-        List<ClientDto> repList = new ArrayList<>();
+        List<ClientResponse> repList = new ArrayList<>();
         for (Client client: clientList){
             repList.add(clientMapper.EntityToClientDto(client));
         }
@@ -60,7 +61,7 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public ClientDto getClientById(Integer clientId) {
+    public ClientResponse getClientById(Integer clientId) {
         Optional<Client> client = clientDao.findById(clientId);
         if (client.isPresent()){
             return clientMapper.EntityToClientDto(client.get());

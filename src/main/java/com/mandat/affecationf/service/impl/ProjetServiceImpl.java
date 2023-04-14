@@ -5,6 +5,7 @@ import com.mandat.affecationf.entity.Projet;
 import com.mandat.affecationf.exception.NotFoundException;
 import com.mandat.affecationf.mapper.ProjetMapper;
 import com.mandat.affecationf.model.ProjetDto;
+import com.mandat.affecationf.model.ProjetResponse;
 import com.mandat.affecationf.service.ProjetService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,10 +28,10 @@ public class ProjetServiceImpl implements ProjetService {
     }
 
     @Override
-    public List<ProjetDto> getAllProjet() {
+    public List<ProjetResponse> getAllProjet() {
         logger.info("PRecuperer toutes les Projet");
         List<Projet> projetList = projetDao.findAll();
-        List<ProjetDto> repList = new ArrayList<>();
+        List<ProjetResponse> repList = new ArrayList<>();
         for (Projet projet: projetList){
             repList.add(projetMapper.EntityToProjetDto(projet));
         }
@@ -59,7 +60,7 @@ public class ProjetServiceImpl implements ProjetService {
     }
 
     @Override
-    public ProjetDto getProjetById(Integer projetId) {
+    public ProjetResponse getProjetById(Integer projetId) {
         logger.info("P003 getByIdprojet");
         Optional<Projet> projet = projetDao.findById(projetId);
         if (projet.isPresent()){

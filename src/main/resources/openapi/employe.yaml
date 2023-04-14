@@ -1,11 +1,8 @@
 openapi: 3.0.1
 info:
   title: Affectation Fujitsu
-  description: Mini projet pour les affectations des employés.
-  version: 1.0.0
 components:
   schemas:
-
     #request and response pour l'employe
     EmployeReq:
       type: object
@@ -19,6 +16,9 @@ components:
       properties:
         nom:
           type: string
+          minLength: 2
+          maxLength: 5
+          example: Vincent
         prenom:
           type: string
         adresse:
@@ -48,15 +48,4 @@ components:
             id_employe:
               type: integer
       description: Toutes les employés.
-
-
-    #DTO pour afficher les messages d'erreur
-    Errorr:
-      type: object
-      properties:
-        code:
-          type: integer
-          format: int32
-        message:
-          type: string
  
