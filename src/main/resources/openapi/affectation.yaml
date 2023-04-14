@@ -1,28 +1,28 @@
 openapi: 3.0.1
 info:
-  title: API pour l'entité Projet
+  title: API pour l'entité Affectation
   version: 1.0.0
 components:
   schemas:
-    ProjetDto:
+    AffectationDto:
       type: object
-      required:
-        - code_projet
       properties:
-        code_projet:
+        employe:
+          $ref: 'employe.yaml#/components/schemas/EmployesRep'
+        projet:
+          $ref: 'projet.yaml#/components/schemas/ProjetResponse'
+        dateDebut:
           type: string
-        nom_projet:
+          format: date
+        dateFin:
           type: string
-        description:
-          type: string
-        client:
-          $ref: 'client.yaml#/components/schemas/ClientDto'
+          format: date
 
-    ProjetResponse:
+    AffectationResponse:
       allOf:
-        - $ref: '#/components/schemas/ProjetDto'
+        - $ref: '#/components/schemas/AffectationDto'
         - type: object
           properties:
-            id_projet:
+            id_affectation:
               type: integer
-      description: Toutes les propriétés de l'entité Projet.
+      description: Toutes les propriétés de l'entité affectation.
