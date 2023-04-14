@@ -13,6 +13,8 @@ tags:
     description: Endpoints pour l'operation sur le client
   - name: Projets
     description: Endpoints pour l'operation le projet
+  - name: Affectation
+    description: Endpoints pour l'operation effectué aux affectations
 paths:
   /employes:
     post:
@@ -93,6 +95,10 @@ paths:
           description: Ressource non trouvée
         '500':
           description: Erreur interne du serveur
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
 
     put:
       tags:
@@ -129,6 +135,10 @@ paths:
           description: Employe non trouvé
         '500':
           description: Erreur interne du serveur
+          content:
+            application/problem+json:
+              schema:
+                $ref: '#/components/schemas/ErrorDetails'
 
     delete:
       tags:
@@ -374,6 +384,117 @@ paths:
         - name: projet_id
           in: path
           description: ID du projet à supprimer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '204':
+          description: Aucun contenu
+        '404':
+          description: client non trouvé
+
+  #endpoints pour l'affectation
+  /affectation:
+    post:
+      tags:
+        - Affectation
+      summary: Enregistrement des affectations
+      operationId: saveAffectations
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'affectation.yaml#/components/schemas/AffectationDto'
+      responses:
+        '201':
+          description: Ajout success
+          content:
+            application/json:
+              schema:
+                $ref: 'affectation.yaml#/components/schemas/AffectationDto'
+        '500':
+          description: Erreur interne du serveur
+
+    get:
+      tags:
+        - Affectation
+      summary: Récupérer la liste des toutes les affectations disponibles
+      operationId: getAllAffectation
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: 'affectation.yaml#/components/schemas/AffectationResponse'
+        '500':
+          description: Erreur interne du serveur
+
+  /affectation/{affectation_id}:
+    get:
+      tags:
+        - Affectation
+      summary: Obtenir une affectation par ID
+      operationId: getAffectById
+      description: Récupère une affectation spécifique en fonction de son ID.
+      parameters:
+        - name: affectation_id
+          in: path
+          description: ID du affection à récupérer
+          required: true
+          schema:
+            type: integer
+      responses:
+        '200':
+          description: Succès - Ressource récupérée
+          content:
+            application/json:
+              schema:
+                $ref: 'affectation.yaml#/components/schemas/AffectationResponse'
+        '404':
+          description: Ressource non trouvée
+        '500':
+          description: Erreur interne du serveur
+
+    put:
+      tags:
+        - Affectation
+      summary: Mettre à jour la table affectation
+      operationId: updateAffectation
+      parameters:
+        - name: affectation_id
+          in: path
+          required: true
+          schema:
+            type: integer
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'affectation.yaml#/components/schemas/AffectationDto'
+      responses:
+        '200':
+          description: Data mis à jour avec succès
+          content:
+            application/json:
+              schema:
+                $ref: 'affectation.yaml#/components/schemas/AffectationDto'
+        '404':
+          description: data non trouvé
+        '500':
+          description: Erreur interne du serveur
+
+    delete:
+      tags:
+        - Affectation
+      summary: Supprimer une affectation par ID
+      operationId: deleteAffectationById
+      parameters:
+        - name: affectation_id
+          in: path
+          description: ID du affectation à supprimer
           required: true
           schema:
             type: integer

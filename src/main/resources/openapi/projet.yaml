@@ -16,7 +16,7 @@ components:
         description:
           type: string
         client:
-          $ref: 'client.yaml#/components/schemas/ClientDto'
+          $ref: 'client.yaml#/components/schemas/ClientResponse'
 
     ProjetResponse:
       allOf:

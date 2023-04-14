@@ -18,8 +18,6 @@ import java.util.Optional;
 /**
  *  Point d'entrée du controle pour le Client comme Controller normale
  *
- */ /**
- * Point d'entrée du controle pour le Client comme Controller normale
  */
 @Service
 public class ClientDelegate implements ClientsApiDelegate {
