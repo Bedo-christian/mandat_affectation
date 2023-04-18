@@ -1,4 +1,4 @@
-package com.mandat.affecationf.dao;
+package com.mandat.affecationf.delegate;
 
 import com.mandat.affecationf.api.AffectationApiDelegate;
 import com.mandat.affecationf.model.AffectationDto;
