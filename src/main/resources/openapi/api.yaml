@@ -503,6 +503,52 @@ paths:
           description: Aucun contenu
         '404':
           description: client non trouvé
+
+  /user:
+    post:
+      tags:
+        - Utilisateur
+      summary: enregistrer un utilisateur avec mot de passe
+      operationId: saveUser
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'utilisateur.yaml#/components/schemas/UtilisateurDto'
+      responses:
+        '201':
+          description: Utilisateur ajouté avec success
+        #          content:
+        #            application/json:
+        #              schema:
+        #                $ref: 'affectation.yaml#/components/schemas/AffectationDto'
+        '409':
+          description: login ou username existe déjà
+        '500':
+          description: Erreur interne du serveur
+  /user/authentification:
+    post:
+      tags:
+        - Authentification
+      summary: Obtenir un token pour s'authentifier
+      operationId: getToken
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: 'utilisateur.yaml#/components/schemas/UtilisateurDto'
+      responses:
+        '200':
+          description: authentification Ok
+          content:
+            application/json:
+              schema:
+                $ref: 'utilisateur.yaml#/components/schemas/TokenResponse'
+        '401':
+          description: Utilisateur non autorisé login/mot de pass incorrect
+        '500':
+          description: Erreur interne du serveur
+
 components:
   schemas:
     #DTO pour afficher les messages d'erreur
